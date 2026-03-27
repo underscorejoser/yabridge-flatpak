@@ -1,0 +1,21 @@
+id: org.freedesktop.LinuxAudio.Plugins.yabridge
+runtime: org.freedesktop.LinuxAudio.BaseExtension
+runtime-version: stable
+sdk: org.freedesktop.Sdk//25.08
+build-extension: true
+# base: org.winehq.Wine
+# base-version: wow64-25.08
+branch: '25.08'
+
+modules:
+  - name: hello
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 hello.sh ${FLATPAK_DEST}/bin/hello
+    sources:
+      - type: script
+        dest-filename: hello.sh
+        commands:
+          - echo "Hello world, from a sandbox"
+          - compgen -c
+
