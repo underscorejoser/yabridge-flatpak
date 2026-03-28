@@ -7,9 +7,6 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
 command: yabridgectl
 
-# Needed for Kron4ek/Wine-Builds but makes everything slower
-# writable-sdk: true
-
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins.yabridge:
     version: "5.1.1"
@@ -30,6 +27,8 @@ modules:
       - --cross-file=../cross-wine.conf
     post-install:
       - mkdir -p ${FLATPAK_DEST}/extensions/Plugins/yabridge
+      - install yabridge-host.exe{,.so} "${FLATPAK_DEST}/bin"
+      - install libyabridge{,-chainloader}-{vst2,vst3,clap}.so "${FLATPAK_DEST}/lib"
     sources:
       - type: git
         url: https://github.com/robbert-vdh/yabridge.git
