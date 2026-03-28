@@ -1,0 +1,30 @@
+name: wine
+build-options:
+  append-path: /usr/lib/sdk/mingw-w64/bin
+  env:
+    CC: ccache gcc
+    i386_CC: ccache i686-w64-mingw32-gcc
+    x86_64_CC: ccache x86_64-w64-mingw32-gcc
+config-opts:
+  - --libdir=/app/lib
+  - --enable-archs=i386,x86_64
+  - --disable-winemenubuilder
+  - --disable-tests
+make-install-args:
+  - LDCONFIG=/bin/true
+  - UPDATE_DESKTOP_DATABASE=/bin/true
+  - INSTALL_PROGRAM_FLAGS=-s
+sources:
+  - type: archive
+    url: https://dl.winehq.org/wine/source/11.x/wine-11.5.tar.xz
+    sha256: 11370b57ea5d548a54d92c9cd65d0ba635f4f1c3eadace09ed1c419f705e19d1
+
+# name: wine
+# buildsystem: simple
+# build-commands:
+#   # Kron4ek/Wine-Builds builds with g++-11 :sob:
+#   - ln -s /usr/bin/g++ /usr/bin/g++-11
+#   - mp * /appd
+#   - type: archive
+#     url: https://github.com/Kron4ek/Wine-Builds/releases/download/11.5/wine-11.5-amd64-wow64.tar.xz
+#     sha256: ecf9ec141063cdc1f37ae309500c390884757cba561a8c324ec1743627faa5ec
